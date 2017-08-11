@@ -41,6 +41,9 @@ namespace IndustryProject
             // TODO: This line of code loads data into the 'comboData.FEATURE_TYPES' table. You can move, or remove it, as needed.
             this.fEATURE_TYPESTableAdapter.Fill(this.comboData.FEATURE_TYPES);
 
+            chkInactive.Checked = true;
+
+
             this.AcceptButton = this.btnSearch;
             txtSearch.Focus();
             ConnectionClass.Initialize();
@@ -79,6 +82,7 @@ namespace IndustryProject
                         ON PLACES.PLACE_ID = NAME_PLACES.PLACE_ID LEFT JOIN CASUALTIES ON NAMES.CASUALTY_ID = CASUALTIES.CASUALTY_ID
                         LEFT JOIN FEATURE_TYPES ON PLACES.FEAT_CODE = FEATURE_TYPES.FEAT_CODE ";
 
+            
             if (radMaps.Checked)
             {
                 MakeSpecificRadioAvailabel(sender, e);
@@ -125,9 +129,7 @@ namespace IndustryProject
             {
                 basicQuery += " WHERE NAME_PLACES.FEATURE_ID = @ident";
                 ConnectionClass.AddParam("ident", enteredName);
-            }
-
-          
+            }          
 
             else if (radStatus.Checked && !String.IsNullOrWhiteSpace(enteredName))
             {
@@ -136,9 +138,7 @@ namespace IndustryProject
             }
 
             bds = ConnectionClass.getSQLData(basicQuery).Tables[0];
-            
-
-            
+                                   
             dgvSearch.DataSource = bds;
 
             for (int i = 1; i < dgvSearch.ColumnCount; i++)
@@ -188,18 +188,8 @@ namespace IndustryProject
                 lbl250.Text = dgvSearch.CurrentRow.Cells["NTS 250000 Map Sheet"].Value.ToString();
                 lbl50.Text = dgvSearch.CurrentRow.Cells["NTS 50000 Submap Sheet"].Value.ToString();
 
-                // If there is not data available
-                if (String.IsNullOrEmpty(dgvSearch.CurrentRow.Cells["Date Changed"].Value.ToString()))
-                {
-                    lblDateChanged.Text = "No Data";
-                }
 
-                else
-                {
-                    string mess = DateTime.Parse(dgvSearch.CurrentRow.Cells["Date Changed"].Value.ToString()).ToShortDateString();
-                    lblDateChanged.Text = mess;
-                    //lblDateChanged.TextAlign = ContentAlignment.BottomCenter;
-                }
+                
             }
         }
 
@@ -208,11 +198,14 @@ namespace IndustryProject
             if (String.IsNullOrEmpty(dgvSearch.CurrentRow.Cells["Casualty Given Name"].Value.ToString()))
             {
                 chkCasualty.Checked = false;
+                chkCasualty.BackColor = Color.LightGray;
                 btnCasualtyHistory.Enabled = false;
+
             }
             else
             {
                 chkCasualty.Checked = true;
+                chkCasualty.BackColor = Color.Red;
                 btnCasualtyHistory.Enabled = true;
             }
         }
@@ -374,15 +367,8 @@ namespace IndustryProject
             }
         }
 
-        private void grpSearchBottom_EnabledChanged(object sender, EventArgs e)
-        {          
-            //cboStatus.DisplayMember = "Status";
-            //cboStatus.ValueMember = "STATUS_CODE";
-        }
-
         private void dgvSearch_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-      
+        {      
             cboFear.DataSource = ConnectionClass.getSQLData("SELECT DISTINCT * FROM FEATURE_TYPES ORDER BY FEAT_TYPE ASC").Tables[0];
             cboFear.DisplayMember=
             cboFear.ValueMember = "FEAT_TYPE";
@@ -390,12 +376,6 @@ namespace IndustryProject
             cboStatus.DataSource = ConnectionClass.getSQLData("SELECT DISTINCT STATUS_CODE FROM NAME_PLACES ORDER BY STATUS_CODE ASC").Tables[0];
             cboStatus.DisplayMember =
             cboStatus.ValueMember = "STATUS_CODE";
-
-        }
-
-        private void dgvSearch_Click(object sender, EventArgs e)
-        {
-            //cboFear.SelectedIndex[dgvSearch.CurrentRow.Cells["FEAT_CODE"]];
         }
 
         /// <summary>
@@ -421,11 +401,6 @@ namespace IndustryProject
             Application.Exit();
         }
 
-        //private void btnCasualty_Click(object sender, EventArgs e)
-        //{
-        //    frmCasualty frm = new frmCasualty();
-        //    frm.Show();
-        //}
         private void btnNewPlace_Click(object sender, EventArgs e)
         {
             newplace frm2 = new newplace();

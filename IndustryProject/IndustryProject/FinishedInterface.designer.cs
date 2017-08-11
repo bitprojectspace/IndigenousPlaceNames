@@ -142,13 +142,12 @@
             // chkInactive
             // 
             this.chkInactive.AutoSize = true;
-            this.chkInactive.Location = new System.Drawing.Point(447, 127);
+            this.chkInactive.Location = new System.Drawing.Point(32, 127);
             this.chkInactive.Name = "chkInactive";
-            this.chkInactive.Size = new System.Drawing.Size(64, 17);
+            this.chkInactive.Size = new System.Drawing.Size(100, 17);
             this.chkInactive.TabIndex = 27;
-            this.chkInactive.Text = "Inactive";
+            this.chkInactive.Text = "Inactive Names";
             this.chkInactive.UseVisualStyleBackColor = true;
-            
             // 
             // cboFeature
             // 
@@ -349,7 +348,7 @@
             // radMS50
             // 
             this.radMS50.AutoSize = true;
-            this.radMS50.Location = new System.Drawing.Point(228, 47);
+            this.radMS50.Location = new System.Drawing.Point(222, 28);
             this.radMS50.Margin = new System.Windows.Forms.Padding(1);
             this.radMS50.Name = "radMS50";
             this.radMS50.Size = new System.Drawing.Size(62, 17);
@@ -363,7 +362,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(75, 123);
+            this.btnSearch.Location = new System.Drawing.Point(170, 123);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 10;
@@ -373,7 +372,7 @@
             // 
             // btnNewPlace
             // 
-            this.btnNewPlace.Location = new System.Drawing.Point(338, 123);
+            this.btnNewPlace.Location = new System.Drawing.Point(316, 123);
             this.btnNewPlace.Name = "btnNewPlace";
             this.btnNewPlace.Size = new System.Drawing.Size(75, 23);
             this.btnNewPlace.TabIndex = 9;
@@ -438,7 +437,7 @@
             // radMS250
             // 
             this.radMS250.AutoSize = true;
-            this.radMS250.Location = new System.Drawing.Point(148, 47);
+            this.radMS250.Location = new System.Drawing.Point(159, 28);
             this.radMS250.Name = "radMS250";
             this.radMS250.Size = new System.Drawing.Size(68, 17);
             this.radMS250.TabIndex = 2;
